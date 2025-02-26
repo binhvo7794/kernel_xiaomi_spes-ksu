@@ -89,6 +89,11 @@ echo 'alias grep="/usr/bin/grep $GREP_OPTIONS"' >> ~/.bashrc
 echo 'unset GREP_OPTIONS' >> ~/.bashrc
 source ~/.bashrc
 
+curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next
+cd KernelSU-Next
+patch -p1 < ../0001-kernel-patch-susfs-v1.5.5-to-KernelSU-Next-v1.0.5.patch
+cd ..
+
 export PATH="$(pwd)/$TOOLCHAIN_DIRECTORY/custom-clang/bin:${PATH}"
 make O=out CC=clang ARCH=arm64 $DEFCONFIG
 make -j$CPU O=out \
